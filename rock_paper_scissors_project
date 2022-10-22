@@ -23,8 +23,8 @@ class Player:
 
 
 class RandomPlayer(Player):
-    def moves(self):
-        return random.choice(self.moves)
+    def move(self):
+        return random.choice(moves)
 
 class ReflectPlayer(Player):
     def move(self):
@@ -47,11 +47,11 @@ class CyclePlayer(Player):
 
 class HumanPlayer(Player):
     def move(self):
+        player_choice = input("choose rock, paper, or scissors").lower
         while True:
-            player_choice = input("Choose Rock, Paper, or Scissors")
-            if player_choice.lower() in self.moves:
+            if player_choice() in moves:
                 return player_choice()
-            elif player_choice.lower() == "exit":
+            elif player_choice() == "exit":
                 exit()
             else:
                 return "i'm sorry, that's not a choice"
@@ -106,7 +106,9 @@ class Game:
 
         print("Game over!")
 
+Opponents = (RandomPlayer(), ReflectPlayer(), CyclePlayer())
+randomized_opponents = random.choice(Opponents)
 
 if __name__ == '__main__':
-    game = Game(Player(), Player())
+    game = Game(HumanPlayer(), randomized_opponents)
     game.play_game()
